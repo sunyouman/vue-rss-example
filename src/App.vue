@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <DownloadButton v-on:receive="receiveMessage"/>
+    <!-- https://www.nasa.gov/rss/dyn/lg_image_of_the_day.rss-->
+    <DownloadButton v-on:receive="receiveMessage" rss-url="./static/test.rss">Test1 download</DownloadButton>
+    <DownloadButton v-on:receive="receiveMessage" rss-url="./static/test2.rss">Test2 download</DownloadButton>
     <RssList v-bind:rss-data="rssData" v-bind:is-received="isReceived" />
   </div>
 </template>

@@ -1,6 +1,8 @@
 <template>
   <div>
-    <button v-bind:disabled="isButtonDisabled" @click="btClick">{{buttonText}}</button>
+    <button v-bind:disabled="isButtonDisabled" @click="btClick">
+        <slot></slot>
+    </button>
   </div>
 </template>
 
@@ -8,23 +10,20 @@
 
 const axios = require('axios');
 const convert = require('xml-js');
-const request = require('request');
 
 export default {
     name: 'DownloadButton',
+    props: ["rssUrl"],
     data() {
         return {
-            isButtonDisabled: false,
-            buttonText: 'Download'
+            isButtonDisabled: false
         }
     },
     methods: {
         btClick() {
             this.isButtonDisabled = true;
-            this.buttonText = 'Received';
             var bt = this;
-            // https://www.nasa.gov/rss/dyn/lg_image_of_the_day.rss
-            axios.get('./static/test.rss').then(response => {
+            axios.get(this.rssUrl).then(response => {
                 var json = convert.xml2js(response.data, {compact: true, spaces: 4});
                 bt.$emit('receive', json);
             });
