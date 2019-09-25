@@ -10,6 +10,9 @@
         </div>
     </div>
 </div>
+<div v-else>
+    Please click download button!!
+</div>
 </template>
 
 <script>
